@@ -131,10 +131,10 @@ def main():
     args = parser.parse_args()
     args.cuda = not args.no_cuda and torch.cuda.is_available()
 
-    if not os.path.isdir('./.data'):
-        os.mkdir('./.data')
+    if not os.path.isdir('data'):
+        os.mkdir('data')
     train_dataset, test_dataset = text_classification.DATASETS['AG_NEWS'](
-        root='./.data', ngrams=args.ngrams, vocab=None)
+        root='data', ngrams=args.ngrams, vocab=None)
 
     args.vocab_size = len(train_dataset.get_vocab())
     args.num_class = len(train_dataset.get_labels())
