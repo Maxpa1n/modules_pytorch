@@ -17,8 +17,11 @@ class SinWave(Dataset):
         B_t = torch.from_numpy(B).unsqueeze(1).repeat(1, self.num_sample)
         self.X = torch.from_numpy(X).unsqueeze(0).repeat(self.num_params, 1)
         self.Y = torch.mul(A_t, torch.sin(self.X + B_t))
-        self.A = torch.from_numpy(A)
-        self.B = torch.from_numpy(B)
+        self.Y = self.Y.numpy()
+        self.X = self.X.numpy()
+        self.A = A
+        self.B = B
+
 
     def __getitem__(self, index):
         return self.X[index], self.Y[index], self.A[index], self.B[index]
@@ -30,7 +33,7 @@ class SinWave(Dataset):
 if __name__ == '__main__':
     x = np.arange(-5, 5, 0.02)
     A = np.arange(0.1, 5.0, 0.049)[:100]
-    B = np.arange(0, np.pi, 0.0314159)[:100]
+    B = np.arange(0, np.pi, 0.031415926)[:100]
 
     sindataset = SinWave(A, B, x)
     x, y, a, b = sindataset[:50]
@@ -40,7 +43,7 @@ if __name__ == '__main__':
           .format(x.shape, y.shape, a, b))
     plt.xlim(-5, 5)
     plt.ylim(-9, 9)
-    plt.plot(x[12].numpy(), y[45].numpy(), label='one sampler')
+    plt.plot(x[44].numpy(), y[44].numpy(), label='one sampler')
     plt.xlabel('input x')
     plt.ylabel('output y')
     plt.show()
