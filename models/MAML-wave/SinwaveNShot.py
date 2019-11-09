@@ -132,3 +132,4 @@ if __name__ == '__main__':
     print('x_spt shape: {}'.format(x_spt.shape))
     print('y_spt shape: {}'.format(y_spt.shape))
     print('param_spt shape {}'.format(param_spt.shape))
+    print('x_qry shape: {}'.format(x_qry.shape))
