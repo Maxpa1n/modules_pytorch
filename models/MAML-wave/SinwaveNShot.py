@@ -60,7 +60,7 @@ class SinwaveNShot:
     def next(self, mode='train'):
         if self.indexes[mode] >= len(self.datasets_cache[mode]):
             self.indexes[mode] = 0
-            self.datasets_cache[mode] = self.load_data_cache(self.datasets[mode])
+            self.datasets_cache[mode] = self.load_cache_data(self.datasets[mode])
 
         next_batch = self.datasets_cache[mode][self.indexes[mode]]
         self.indexes[mode] += 1
