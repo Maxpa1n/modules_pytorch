@@ -7,13 +7,13 @@ import numpy as np
 
 
 def main():
-    torch.manual_seed(222)
-    torch.cuda.manual_seed_all(222)
-    np.random.seed(222)
+    torch.manual_seed(121)
+    torch.cuda.manual_seed_all(121)
+    np.random.seed(121)
 
     nshot = SinwaveNShot(all_numbers_class=2000, batch_size=20,
                          n_way=5, k_shot=5, k_query=15, root='data')
-    maml = Meta(hid_dim=64, meta_lr=1e-3, update_lr=1e-3)
+    maml = Meta(hid_dim=64, meta_lr=1e-3, update_lr=0.004)
 
     for step in range(10000):
         x_spt, y_spt, x_qry, y_qry, param_spt, param_qry = nshot.next('train')
@@ -21,7 +21,7 @@ def main():
             x_qry), torch.from_numpy(y_qry)
 
         loss = maml(x_spt, y_spt, x_qry, y_qry)
-        if step % 50 == 0:
+        if step % 20 == 0:
             print('step:', step, '\ttraining loss:', loss)
 
         if step % 500 == 0:

@@ -7,13 +7,13 @@ class Compute(nn.Module):
     def __init__(self, hid_dim):
         super(Compute, self).__init__()
         self.input_layer = nn.Linear(1, hid_dim)
-        self.hid_layer = nn.Linear(hid_dim, hid_dim)
+        # self.hid_layer = nn.Linear(hid_dim, hid_dim)
         self.output_layer = nn.Linear(hid_dim, 1)
         self.relu = nn.ReLU()
 
     def forward(self, X):
         hid = self.relu(self.input_layer(X))
-        hid = self.relu(self.hid_layer(hid))
+        # hid = self.relu(self.hid_layer(hid))
         output = self.output_layer(hid)
         return output
 
@@ -27,8 +27,8 @@ class Learner(nn.Module):
     def forward(self, x, com=None):
         if com is not None:
             x = F.linear(x, com[0], com[1])
-            x = F.linear(x, com[2], com[3])
-            y = F.linear(x, com[4], com[5])
+            # x = F.linear(x, com[2], com[3])
+            y = F.linear(x, com[2], com[3])
             return y
         else:
             y = self.com(x)

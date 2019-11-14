@@ -22,7 +22,6 @@ class SinWave(Dataset):
         self.A = A
         self.B = B
 
-
     def __getitem__(self, index):
         return self.X[index], self.Y[index], self.A[index], self.B[index]
 
